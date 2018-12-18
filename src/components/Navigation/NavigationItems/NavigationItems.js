@@ -6,7 +6,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const navigationItems = (props) => (
   <ul className={classes.NavigationItems}>
     <NavigationItem link="/" exact>상품목록</NavigationItem>
-    <NavigationItem link="/orders" exact>주문하기</NavigationItem>
+    <NavigationItem link="/orders" exact>장바구니</NavigationItem>
   </ul>
 )
 

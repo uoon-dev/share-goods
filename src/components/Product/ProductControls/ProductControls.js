@@ -11,6 +11,7 @@ const productControls = (props) => (
         provider={value.provider}
         price={value.price}
         options={value.options}
+        shipping={value.shipping}
         key={key}
       />
     )}

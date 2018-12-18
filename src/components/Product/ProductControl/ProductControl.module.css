@@ -6,3 +6,17 @@
 .Select {
   font-size: 15px;
 }
+
+.ProductFooter {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  padding-right: 20px;
+  align-items: baseline;
+  margin-top: -10px;
+}
+
+.ShippingInfo {
+  color: #aaa;
+  font-size: 14px;
+}
