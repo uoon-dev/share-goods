@@ -1,0 +1,11 @@
+.ProductControls {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+@media (max-width:679px) {
+  .ProductControls {
+    justify-content: center;
+  }
+} 

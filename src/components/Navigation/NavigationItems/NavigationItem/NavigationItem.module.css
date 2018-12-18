@@ -30,6 +30,7 @@
   }
   
   .NavigationItem a {
+    background-color: #aaa;
     color: white;
     height: 100%;
     padding: 16px 10px;
