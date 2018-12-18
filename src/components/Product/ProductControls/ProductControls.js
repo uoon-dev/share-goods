@@ -10,7 +10,8 @@ const productControls = (props) => (
         name={value.name}
         provider={value.provider}
         price={value.price}
-        key={value.key}
+        options={value.options}
+        key={key}
       />
     )}
   </ul>
