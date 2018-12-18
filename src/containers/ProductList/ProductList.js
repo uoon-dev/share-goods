@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import uuidv4 from 'uuid';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
 import axios from '../../axios-order';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
@@ -23,7 +23,7 @@ class ProductList extends Component {
   }
 
   addToBasket = (product) => {
-    // NotificationManager.success('장바구니에 추가되었습니다.', '성공');
+    NotificationManager.success('장바구니에 추가되었습니다.', '성공');
     localStorage.setItem(`product-basket-${uuidv4()}`, JSON.stringify(product));
   }
 
@@ -39,7 +39,6 @@ class ProductList extends Component {
       <div>
         <Title title="What You Need"></Title>
         {productControls}
-        <NotificationContainer />
       </div>
     )
   }

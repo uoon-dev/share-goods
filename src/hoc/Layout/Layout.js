@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import { NotificationContainer } from 'react-notifications';
 
 const layout = (props) => (
   <>
@@ -8,6 +9,7 @@ const layout = (props) => (
     <main>
       {props.children}
     </main>
+    <NotificationContainer />
   </>
 )
 
