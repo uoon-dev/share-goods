@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-import axios from '../../axios-styleshare';
 import { NotificationManager } from 'react-notifications';
+import axios from '../../axios-styleshare';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
-
 class Checkout extends Component {
   state = {
     goods: []
@@ -18,6 +17,7 @@ class Checkout extends Component {
           const product = res.data[key];
           product.key = key;
           product.originPrice = res.data[key].price;
+          product.amount = 1;
           this.setState(prevState => (
             {
               goods: [...prevState.goods, { ...product }]
@@ -41,19 +41,22 @@ class Checkout extends Component {
   updatePrice = (e, item) => {
     const ItemIndex = this.state.goods.findIndex(value => value.key === item.key);
     const goods = [...this.state.goods];
-    const amount = e.target.value;
+    const amount = parseInt(e.target.value);
     const originPrice = item.originPrice;
-    goods[ItemIndex].price = amount * originPrice;
-
+    goods[ItemIndex] = {
+      ...goods[ItemIndex],
+      price: amount * originPrice,
+      amount
+    }
     this.setState({
       goods
     })
+
   }
 
 
   render() {
     let checkoutSummary;
-    console.log(this.props);
     if (this.state.goods.length > 0) {
       checkoutSummary = <CheckoutSummary
         goods={this.state.goods}

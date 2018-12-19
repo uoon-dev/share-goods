@@ -80,18 +80,24 @@ class ContactData extends Component {
     loading: false
   }
 
-  orderHandler = (e) => {
+  orderHandler = async (e) => {
     e.preventDefault();
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
     }
+
     formData.goods = this.props.goods;
     const order = {
       orderData: formData
     }
-    axios.post('/orders.json', order)
+    await axios.post('/orders.json', order)
       .then(response => {
+        for (let product of this.props.goods) {
+          axios.delete(`/checkout/${product.key}.json`)
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+        }
         this.props.history.push('/orders');
       })
       .catch(error => {

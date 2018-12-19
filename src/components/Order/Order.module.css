@@ -1,1 +1,62 @@
+.OrdersContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  width: 80%;
+  padding:10px 20px;
+  margin: 10px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  box-sizing: border-box;
+}
 
+.Order {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding:10px 20px;
+  margin: 15px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  box-sizing: border-box;
+}
+
+.Order svg {
+  cursor: pointer;
+}
+
+.Col2 {
+  display: flex;
+  align-items: center;
+}
+
+.Col2 .Subtitle {
+  margin-right: 5px;
+}
+
+.Col2 .AmountInput {
+  padding: 5px;
+  font-weight: bold;
+  outline: none;
+  font-size: 13px;
+}
+
+.ShippingInfo {
+  color: #aaa;
+  font-size: 14px;
+}
+
+@media (min-width: 600px) {
+  .OrdersContainer {
+    width: 600px;
+    margin-top: 80px;
+  }
+  .Order {
+    width: 500px;
+  }
+  span {
+    display: flex;
+  }
+}

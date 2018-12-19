@@ -34,7 +34,7 @@ const input = props => {
           {props.options.map(option => {
             return props.showBasket === true ?
               (
-                <option key={option.id} value={option.id}>
+                <option key={option.id} value={option.id} disabled={!option.stock}>
                   {option.color} {option.size} 재고 : {option.stock}
                 </option>
               ) :
