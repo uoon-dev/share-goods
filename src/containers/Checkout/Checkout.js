@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from '../../axios-styleshare';
 import { NotificationManager } from 'react-notifications';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
+import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
 
 class Checkout extends Component {
@@ -52,6 +53,7 @@ class Checkout extends Component {
 
   render() {
     let checkoutSummary;
+    console.log(this.props);
     if (this.state.goods.length > 0) {
       checkoutSummary = <CheckoutSummary
         goods={this.state.goods}
@@ -63,6 +65,9 @@ class Checkout extends Component {
       <>
         <Title title="We hope your good shopping!"></Title>
         {checkoutSummary}
+        <ContactData
+          goods={this.state.goods}
+          history={this.props.history} />
       </>
     )
   }

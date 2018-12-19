@@ -13,7 +13,7 @@ class Checkout extends Component {
     await axios.get('/order.json')
       .then(res => {
         for (let key in res.data) {
-          const product = res.data[key];
+          const product = res.data[key].orderData.goods;
           product.key = key;
           this.setState(prevState => (
             {

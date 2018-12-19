@@ -3,11 +3,11 @@
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
-  border: 1px solid #eee;
-  box-shadow: 0 2px 3px #ccc;
+  width: 80%;
   padding:10px 20px;
   margin: 10px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
   box-sizing: border-box;
 }
 
@@ -34,4 +34,10 @@
 .ShippingInfo {
   color: #aaa;
   font-size: 14px;
+}
+
+@media (min-width: 600px) {
+  .CheckoutSummary {
+    width: 500px;
+  }
 }
