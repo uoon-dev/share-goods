@@ -2,3 +2,9 @@
   display: flex;
   flex-flow: row;
 }
+
+@media (max-width: 600px) {
+  .FormData span {
+    margin-right: 15px;
+  }
+}
