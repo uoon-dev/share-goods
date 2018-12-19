@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Image from '../../UI/Image/Image';
 import classes from './ProductControl.module.css';
 import { MdShopTwo } from "react-icons/md";
 
@@ -13,7 +14,10 @@ const productControl = (props) => {
 
   return (
     <li className={classes.ProductControl} key={props.id}>
-      <img src="https://picsum.photos/270/350/?random" alt="goods"></img>
+      <Image
+        placeholderSrc="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-1,h-1:w-270,h-350"
+        src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-270,h-350"
+        alt="goods" />
       <p><strong>{props.name}</strong></p>
       <select
         className={classes.Select}
