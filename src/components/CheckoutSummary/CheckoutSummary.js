@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Input from '../UI/Input/Input';
+import TotalSummary from '../TotalSummary/TotalSummary';
 import { MdDeleteForever } from "react-icons/md";
 import classes from './CheckoutSummary.module.css';
 
@@ -39,9 +40,13 @@ const checkoutSummary = (props) => {
     )
   })
 
+  const totalPrice = <TotalSummary
+    totalPrice={props.totalPrice} />
+
   return (
     <>
       {products}
+      {totalPrice}
     </>
   )
 }

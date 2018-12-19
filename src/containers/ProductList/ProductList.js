@@ -4,14 +4,19 @@ import Alert from 'react-s-alert';
 import axios from '../../axios-styleshare';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
 import Title from '../../components/UI/Title/Title';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class ProductList extends Component {
   state = {
-    goods: []
+    goods: [],
+    loading: true
   }
   async componentDidMount() {
     await axios.get('/goods.json')
-      .then(res => this.setState({ goods: res.data }))
+      .then(res => this.setState({
+        goods: res.data,
+        loading: true
+      }))
       .catch(err => console.error(err));
   }
 
@@ -37,12 +42,12 @@ class ProductList extends Component {
 
   render() {
     let productControls;
-    if (this.state.goods.length > 0) {
-      productControls =
-        <ProductControls
-          goods={this.state.goods}
-          addToBasket={this.addToBasket}></ProductControls>
-    }
+    productControls = (this.state.loading) ? (
+      <ProductControls
+        goods={this.state.goods}
+        addToBasket={this.addToBasket}></ProductControls>
+    ) : <Spinner />
+
     return (
       <div>
         <Title title="What You Need"></Title>

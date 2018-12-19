@@ -6,10 +6,12 @@ import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import TotalSummary from '../../components/TotalSummary/TotalSummary';
 import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
+import Spinner from '../../components/UI/Spinner/Spinner';
 class Checkout extends Component {
   state = {
     goods: [],
-    totalPrice: 0
+    totalPrice: 0,
+    loading: false
   }
 
   async componentDidMount() {
@@ -31,26 +33,27 @@ class Checkout extends Component {
     const goods = [...this.state.goods];
     goods.forEach(item => {
       this.setState({
-        totalPrice: this.state.totalPrice + item.price
+        totalPrice: this.state.totalPrice + item.price + item.shippingPrice
       })
     })
   }
 
   removeGoods = async (item) => {
-    Alert.error('장바구니에서 삭제되었습니다.', {
-      position: 'top-right',
-      effect: 'slide',
-      onShow: function () {
-      },
-      beep: false,
-      timeout: 2000,
-      offset: 100
-    });
-    this.setState({
-      goods: this.state.goods.filter(value => value.key !== item.key)
-    });
     await axios.delete(`/checkout/${item.key}.json`)
-      .then(res => console.log(res))
+      .then(res => {
+        Alert.error('장바구니에서 삭제되었습니다.', {
+          position: 'top-right',
+          effect: 'slide',
+          onShow: function () { },
+          beep: false,
+          timeout: 2000,
+          offset: 100
+        });
+        this.setState(prevState => ({
+          goods: this.state.goods.filter(value => value.key !== item.key),
+          totalPrice: prevState.totalPrice - item.price - item.shippingPrice
+        }));
+      })
       .catch(err => console.error(err));
   }
 
@@ -70,29 +73,26 @@ class Checkout extends Component {
     })
     goods.forEach(item => {
       this.setState(prevState => ({
-        totalPrice: prevState.totalPrice + item.price
+        totalPrice: prevState.totalPrice + item.price + item.shippingPrice
       }))
     })
   }
 
 
   render() {
-    let checkoutSummary, totalPrice;
-    if (this.state.goods.length > 0) {
-      checkoutSummary = <CheckoutSummary
+    let checkoutSummary;
+    checkoutSummary = (!this.state.loading) ? (
+      <CheckoutSummary
         goods={this.state.goods}
         removeGoods={this.removeGoods}
-        updatePrice={this.updatePrice} />
-
-      totalPrice = <TotalSummary
+        updatePrice={this.updatePrice}
         totalPrice={this.state.totalPrice} />
-    }
+    ) : <Spinner />
 
     return (
       <>
         <Title title="We hope your good shopping!"></Title>
         {checkoutSummary}
-        {totalPrice}
         <ContactData
           goods={this.state.goods}
           history={this.props.history} />
