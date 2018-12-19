@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import uuidv4 from 'uuid';
 import { NotificationManager } from 'react-notifications';
 
-import axios from '../../axios-checkout';
+import axios from '../../axios-styleshare';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
 import Title from '../../components/UI/Title/Title';
 import classes from './ProductList.module.css';

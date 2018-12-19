@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import axios from '../../axios-checkout';
+import axios from '../../axios-styleshare';
 import { NotificationManager } from 'react-notifications';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import Title from '../../components/UI/Title/Title';
