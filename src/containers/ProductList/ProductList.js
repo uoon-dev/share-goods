@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import uuidv4 from 'uuid';
 import { NotificationManager } from 'react-notifications';
 
-import axios from '../../axios-order';
+import axios from '../../axios-checkout';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
 import Title from '../../components/UI/Title/Title';
 import classes from './ProductList.module.css';
@@ -14,7 +14,7 @@ class ProductList extends Component {
   }
   async componentDidMount() {
     await axios.get('/goods.json')
-      .then(res => this.setState({ goods: res.data.goods }))
+      .then(res => this.setState({ goods: res.data }))
       .catch(err => console.error(err));
   }
 
@@ -22,9 +22,11 @@ class ProductList extends Component {
     return this.state.goods !== nextState.goods
   }
 
-  addToBasket = (product) => {
+  addToBasket = async (product) => {
     NotificationManager.success('장바구니에 추가되었습니다.', '성공');
-    localStorage.setItem(`product-basket-${uuidv4()}`, JSON.stringify(product));
+    await axios.post('/checkout.json', product)
+      .then(res => console.log(res))
+      .catch(err => console.error)
   }
 
   render() {
