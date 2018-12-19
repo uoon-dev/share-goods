@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import uuidv4 from 'uuid';
-import { NotificationManager } from 'react-notifications';
 
+import Alert from 'react-s-alert';
 import axios from '../../axios-styleshare';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
 import Title from '../../components/UI/Title/Title';
-import classes from './ProductList.module.css';
-import 'react-notifications/lib/notifications.css';
 
 class ProductList extends Component {
   state = {
@@ -23,7 +20,16 @@ class ProductList extends Component {
   }
 
   addToBasket = async (product) => {
-    NotificationManager.success('장바구니에 추가되었습니다.', '성공');
+    Alert.success('장바구니에서 추가되었습니다.', {
+      position: 'top-right',
+      effect: 'slide',
+      onShow: function () {
+        console.log('aye!')
+      },
+      beep: false,
+      timeout: 2000,
+      offset: 100
+    });
     await axios.post('/checkout.json', product)
       .then(res => console.log(res))
       .catch(err => console.error)

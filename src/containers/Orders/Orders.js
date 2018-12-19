@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import { NotificationManager } from 'react-notifications';
+import Alert from 'react-s-alert';
 import axios from '../../axios-styleshare';
 import Order from '../../components/Order/Order';
 import Title from '../../components/UI/Title/Title';
-class Checkout extends Component {
+class Orders extends Component {
   state = {
     goods: [],
     formData: []
@@ -35,12 +35,20 @@ class Checkout extends Component {
   }
 
   removeOrder = async (id, index) => {
-    NotificationManager.success('장바구니에서 삭제되었습니다.', '삭제');
-    console.log(this.state.goods);
-    this.setState({
-      goods: this.state.goods.filter((_, i) => i !== index)
+    Alert.error('주문목록에서 삭제되었습니다.', {
+      position: 'top-right',
+      effect: 'slide',
+      onShow: function () {
+        console.log('aye!')
+      },
+      beep: false,
+      timeout: 2000,
+      offset: 100
     });
-    console.log(this.state.goods);
+    this.setState({
+      goods: this.state.goods.filter((_, i) => i !== index),
+      formData: this.state.formData.filter((_, i) => i !== index)
+    });
     // await axios.delete(`/orders/${id}.json`)
     //   .then(res => console.log(res))
     //   .catch(err => console.error(err));
@@ -49,7 +57,6 @@ class Checkout extends Component {
   render() {
     let order;
     if (this.state.goods.length > 0) {
-      console.log(this.state.goods);
       order = <Order
         goods={this.state.goods}
         formData={this.state.formData}
@@ -65,4 +72,4 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+export default Orders;

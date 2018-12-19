@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
-import { NotificationManager } from 'react-notifications';
+import Alert from 'react-s-alert';
 import axios from '../../axios-styleshare';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
+import TotalSummary from '../../components/TotalSummary/TotalSummary';
 import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
 class Checkout extends Component {
   state = {
-    goods: []
+    goods: [],
+    totalPrice: 0
   }
 
   async componentDidMount() {
@@ -26,10 +28,24 @@ class Checkout extends Component {
         }
       })
       .catch(err => console.error(err));
+    const goods = [...this.state.goods];
+    goods.forEach(item => {
+      this.setState({
+        totalPrice: this.state.totalPrice + item.price
+      })
+    })
   }
 
   removeGoods = async (item) => {
-    NotificationManager.error('장바구니에서 삭제되었습니다.', '삭제');
+    Alert.error('장바구니에서 삭제되었습니다.', {
+      position: 'top-right',
+      effect: 'slide',
+      onShow: function () {
+      },
+      beep: false,
+      timeout: 2000,
+      offset: 100
+    });
     this.setState({
       goods: this.state.goods.filter(value => value.key !== item.key)
     });
@@ -49,25 +65,34 @@ class Checkout extends Component {
       amount
     }
     this.setState({
-      goods
+      goods,
+      totalPrice: 0
     })
-
+    goods.forEach(item => {
+      this.setState(prevState => ({
+        totalPrice: prevState.totalPrice + item.price
+      }))
+    })
   }
 
 
   render() {
-    let checkoutSummary;
+    let checkoutSummary, totalPrice;
     if (this.state.goods.length > 0) {
       checkoutSummary = <CheckoutSummary
         goods={this.state.goods}
         removeGoods={this.removeGoods}
         updatePrice={this.updatePrice} />
+
+      totalPrice = <TotalSummary
+        totalPrice={this.state.totalPrice} />
     }
 
     return (
       <>
         <Title title="We hope your good shopping!"></Title>
         {checkoutSummary}
+        {totalPrice}
         <ContactData
           goods={this.state.goods}
           history={this.props.history} />

@@ -1,0 +1,14 @@
+.TotalSummary {
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  padding:10px 20px;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .TotalSummary {
+    width: 500px;
+  }
+}
