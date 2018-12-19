@@ -15,25 +15,25 @@
   cursor: pointer;
 }
 
-.Col2 {
+.CheckoutSummary .Col1 .ShippingInfo {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.CheckoutSummary .Col2 {
   display: flex;
   align-items: center;
 }
 
-.Col2 .Subtitle {
+.CheckoutSummary .Col2 .Subtitle {
   margin-right: 5px;
 }
 
-.Col2 .AmountInput {
+.CheckoutSummary .Col2 .AmountInput {
   padding: 5px;
   font-weight: bold;
   outline: none;
   font-size: 13px;
-}
-
-.ShippingInfo {
-  color: #aaa;
-  font-size: 14px;
 }
 
 @media (min-width: 600px) {

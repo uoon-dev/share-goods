@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-.Order {
+.OrdersContainer .Order {
   width: 100%;
   padding:10px 20px;
   margin: 15px auto;
@@ -23,25 +23,25 @@
   cursor: pointer;
 }
 
-.Col2 {
+.OrdersContainer .Col1 .ShippingInfo {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.OrdersContainer .Col2 {
   display: flex;
   align-items: center;
 }
 
-.Col2 .Subtitle {
+.OrdersContainer .Col2 .Subtitle {
   margin-right: 5px;
 }
 
-.Col2 .AmountInput {
+.OrdersContainer .Col2 .AmountInput {
   padding: 5px;
   font-weight: bold;
   outline: none;
   font-size: 13px;
-}
-
-.ShippingInfo {
-  color: #aaa;
-  font-size: 14px;
 }
 
 @media (min-width: 600px) {
