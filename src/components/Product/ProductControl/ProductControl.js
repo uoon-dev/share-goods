@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Input from '../../UI/Input/Input';
 import Image from '../../UI/Image/Image';
 import classes from './ProductControl.module.css';
 import { MdShopTwo } from "react-icons/md";
@@ -19,15 +20,12 @@ const productControl = (props) => {
         src="https://ik.imagekit.io/demo/img/image4.jpeg?tr=w-270,h-350"
         alt="goods" />
       <p><strong>{props.name}</strong></p>
-      <select
-        className={classes.Select}
-        onChange={setProductOption}>
-        {props.options.map(option =>
-          <option value={option.id} key={option.id}>
-            {option.color} {option.size} 재고 : {option.stock}
-          </option>
-        )}
-      </select>
+      <Input
+        elementType="select"
+        changed={setProductOption}
+        options={props.options}
+        showBasket={true}
+      />
       <p>{props.provider}</p>
       <div className={classes.ProductFooter}>
         <p>{props.price.toLocaleString()}원

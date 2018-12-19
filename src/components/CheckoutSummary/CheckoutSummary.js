@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Input from '../UI/Input/Input';
 import { MdDeleteForever } from "react-icons/md";
 import classes from './CheckoutSummary.module.css';
 
@@ -17,19 +18,22 @@ const checkoutSummary = (props) => {
           </p>
         </div>
         <div className={classes.Col2}>
-          <span className={classes.Subtitle}>수량</span>
-          <input
-            onChange={(e) => props.updatePrice(e, item)}
-            className={classes.AmountInput}
-            type="number"
-            placeholder="수량"
-            defaultValue="1"
-            min="1"
-            max="100">
-          </input>
+          <Input
+            changed={(e) => props.updatePrice(e, item)}
+            // className={classes.AmountInput}
+            elementConfig={
+              {
+                type: "number",
+                defaultValue: "1",
+                min: "1",
+                max: "100"
+              }
+            }
+
+          />
           <MdDeleteForever
             onClick={() => props.removeGoods(item)}
-            size="25px" />
+            size="35px" />
         </div>
       </div>
     )
