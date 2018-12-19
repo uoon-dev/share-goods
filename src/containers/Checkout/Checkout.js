@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Alert from 'react-s-alert';
 import axios from '../../axios-styleshare';
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
-import TotalSummary from '../../components/TotalSummary/TotalSummary';
 import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
 import Spinner from '../../components/UI/Spinner/Spinner';

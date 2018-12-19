@@ -3,16 +3,7 @@
   margin-right: 50px;
 }
 
-.Select {
-  font-size: 15px;
-}
-
-.ShippingInfo {
-  color: #aaa;
-  font-size: 14px;
-}
-
-.ProductFooter {
+.ProductControl .ProductFooter {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -21,6 +12,12 @@
   margin-top: -10px;
 }
 
-.ProductFooter svg {
+.ProductControl ProductFooter svg {
   cursor: pointer;
 }
+
+.ProductControl .ProductFooter .ShippingInfo {
+  color: #aaa;
+  font-size: 14px;
+}
+

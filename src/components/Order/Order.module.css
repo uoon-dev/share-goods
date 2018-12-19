@@ -11,11 +11,7 @@
 }
 
 .Order {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
+  width: 100%;
   padding:10px 20px;
   margin: 15px auto;
   border: 1px solid #eee;
@@ -54,6 +50,10 @@
     margin-top: 80px;
   }
   .Order {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
     width: 500px;
   }
   span {
