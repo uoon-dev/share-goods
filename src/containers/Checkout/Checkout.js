@@ -6,11 +6,13 @@ import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import Title from '../../components/UI/Title/Title';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import EmptyContent from '../../components/EmptyContent/EmptyContent';
+
 class Checkout extends Component {
   state = {
     goods: [],
     totalPrice: 0,
-    loading: false
+    loading: true
   }
 
   async componentDidMount() {
@@ -23,18 +25,25 @@ class Checkout extends Component {
           product.amount = 1;
           this.setState(prevState => (
             {
-              goods: [...prevState.goods, { ...product }]
+              goods: [...prevState.goods, { ...product }],
             }
           ))
         }
+        this.setState({
+          loading: false
+        })
+        const goods = [...this.state.goods];
+        goods.forEach(item => {
+          this.setState({
+            totalPrice: this.state.totalPrice + item.price + item.shippingPrice
+          })
+        })
       })
       .catch(err => console.error(err));
-    const goods = [...this.state.goods];
-    goods.forEach(item => {
-      this.setState({
-        totalPrice: this.state.totalPrice + item.price + item.shippingPrice
-      })
-    })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !nextState.loading || (this.state.goods !== nextState.goods)
   }
 
   removeGoods = async (item) => {
@@ -80,13 +89,17 @@ class Checkout extends Component {
 
   render() {
     let checkoutSummary;
-    checkoutSummary = (!this.state.loading) ? (
-      <CheckoutSummary
-        goods={this.state.goods}
-        removeGoods={this.removeGoods}
-        updatePrice={this.updatePrice}
-        totalPrice={this.state.totalPrice} />
-    ) : <Spinner />
+    if (!this.state.loading) {
+      checkoutSummary = (this.state.goods.length > 0) ? (
+        <CheckoutSummary
+          goods={this.state.goods}
+          removeGoods={this.removeGoods}
+          updatePrice={this.updatePrice}
+          totalPrice={this.state.totalPrice} />
+      ) : <EmptyContent />
+    } else {
+      checkoutSummary = <Spinner />
+    }
 
     return (
       <>

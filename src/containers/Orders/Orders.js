@@ -5,11 +5,13 @@ import axios from '../../axios-styleshare';
 import Order from '../../components/Order/Order';
 import Title from '../../components/UI/Title/Title';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import EmptyContent from '../../components/EmptyContent/EmptyContent';
+
 class Orders extends Component {
   state = {
     goods: [],
     formData: [],
-    loading: false
+    loading: true
   }
 
   async componentDidMount() {
@@ -23,16 +25,19 @@ class Orders extends Component {
           this.setState(prevState => (
             {
               goods: [...prevState.goods, [...product]],
-              formData: [...prevState.formData, { ...formData }]
+              formData: [...prevState.formData, { ...formData }],
             }
           ))
         }
+        this.setState({
+          loading: false
+        })
       })
       .catch(err => console.error(err));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.goods !== nextState.goods
+    return !nextState.loading || (this.state.goods !== nextState.goods)
   }
 
   removeOrder = async (id, index) => {
@@ -58,12 +63,18 @@ class Orders extends Component {
 
   render() {
     let order;
-    order = (!this.state.loading) ? (
-      <Order
-        goods={this.state.goods}
-        formData={this.state.formData}
-        removeOrder={this.removeOrder} />
-    ) : <Spinner />
+    if (!this.state.loading) {
+      console.log('loaded..')
+      order = (this.state.goods.length > 0) ? (
+        <Order
+          goods={this.state.goods}
+          formData={this.state.formData}
+          removeOrder={this.removeOrder} />
+      ) : <EmptyContent />
+    } else {
+      console.log('loading..')
+      order = <Spinner />
+    }
 
     return (
       <>

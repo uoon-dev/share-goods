@@ -5,6 +5,7 @@ import axios from '../../axios-styleshare';
 import ProductControls from '../../components/Product/ProductControls/ProductControls';
 import Title from '../../components/UI/Title/Title';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import EmptyContent from '../../components/EmptyContent/EmptyContent';
 
 class ProductList extends Component {
   state = {
@@ -15,13 +16,13 @@ class ProductList extends Component {
     await axios.get('/goods.json')
       .then(res => this.setState({
         goods: res.data,
-        loading: true
+        loading: false
       }))
       .catch(err => console.error(err));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.goods !== nextState.goods
+    return !nextState.loading || (this.state.goods !== nextState.goods)
   }
 
   addToBasket = async (product) => {
@@ -42,11 +43,15 @@ class ProductList extends Component {
 
   render() {
     let productControls;
-    productControls = (this.state.loading) ? (
-      <ProductControls
-        goods={this.state.goods}
-        addToBasket={this.addToBasket}></ProductControls>
-    ) : <Spinner />
+    if (!this.state.loading) {
+      productControls = (this.state.goods.length > 0) ? (
+        <ProductControls
+          goods={this.state.goods}
+          addToBasket={this.addToBasket}></ProductControls>
+      ) : <EmptyContent />
+    } else {
+      productControls = <Spinner />
+    }
 
     return (
       <div>

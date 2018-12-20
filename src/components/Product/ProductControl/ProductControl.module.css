@@ -3,6 +3,10 @@
   margin-right: 50px;
 }
 
+.ProductControl svg {
+  cursor: pointer;
+}
+
 .ProductControl .ProductFooter {
   display: flex;
   flex-flow: row;
@@ -10,10 +14,6 @@
   padding-right: 20px;
   align-items: baseline;
   margin-top: -10px;
-}
-
-.ProductControl ProductFooter svg {
-  cursor: pointer;
 }
 
 .ProductControl .ProductFooter .ShippingInfo {
