@@ -2,7 +2,7 @@
   "name": "styleshare",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://uoon-dev.github.io/share-goods",
+  "homepage": "/share-goods",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.6.3",
