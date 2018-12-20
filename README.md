@@ -1,5 +1,5 @@
 # Share Goods
-An order system for StyleShare Goods based on React
+An order system for StyleShare Goods with React
 based on [create-react-app](https://github.com/facebook/create-react-app/) 
 
 ## Demos
